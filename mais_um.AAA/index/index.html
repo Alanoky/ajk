@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../script/script.js">
+    <link rel="stylesheet" href="../styles/resptest.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="pai">
+
+   <div id="titulo"><h1>LISTA DE TAREFAS</h1></div>
+    
+    <div id="div" class="header">
+        <input type="text" id="input" placeholder="O QUE FAZER...">
+        <span onclick="newElement()" class="button">ADICIONAR</span>
+      </div>
+    </div>
+    <ul id="ul">
+       
+    </ul>
+    
+      <style>
+
+@font-face {
+    font-family:"yikes";
+    src: url(yikes.ttf);
+}
+/* inclue preenchimento e borda de acorda com a altura e largura do elemento*/
+* {
+    box-sizing: border-box;
+  }
+
+.body{
+  background-image: url(../img/Chaves7508_480.webp);
+}
+
+  /* remove margens e preenchimento da lista*/
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  /*estiliza itens da lista*/
+  ul li {
+    cursor: pointer;
+    position: relative;
+    padding: 12px 8px 12px 40px;
+    background: #eee;
+    font-size: 18px;
+    transition: 0.2s;
+    border-radius: 40px;        
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  /* muda a cor dos itens inpares*/
+  ul li:nth-child(odd) {
+    background: #f9f9f9;
+  }
+
+  /* muda a cor do fundo do item se o cursor passar por cima*/
+  ul li:hover {
+    background: #ddd;
+  }
+
+  /* se o item for clicado, muda a cor de fundo e corda uma linha no texto*/
+  ul li.checked {
+    background: #888;
+    color: #fff;
+    text-decoration: line-through;
+  }
+
+  /* adiciona um símbolo de "concluído" caso o item seja clicado*/
+  ul li.checked::before {
+    content: '';
+    position: absolute;
+    border-color: #fff;
+    border-style: solid;
+    border-width: 0 2px 2px 0;
+    top: 10px;
+    left: 16px;
+    transform: rotate(45deg);
+    height: 15px;
+    width: 7px;
+    
+  }
+
+/*estiliza o botão de fechar*/
+  .close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 12px 16px 12px 16px;
+    border-radius: 40PX;
+    
+  }
+  
+  .close:hover {
+    background-color: #f44336;
+    color: white;
+  }
+
+
+/* estiliza o cabeçalho*/
+  h1 {
+    font-family: "yikes";
+    padding: 30px 40px;
+    color: rgb(255, 93, 18);
+    text-align: center;
+    text-shadow: rgb(255, 68, 0) 30px;
+   
+  }
+
+  body{
+    background-image: url(../img/2783313260-vila-do-chaves.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+ 
+  /*estiliza a barra de preeenchimento*/
+  input {
+    font-family:"yikes";
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    width: 75%;
+    padding: 10px;
+    float: left;
+    font-size: 16px;
+    border-radius: 40px;
+  }
+
+  /*estiliza o botão de adicionar*/
+  .button {
+    font-family:"yikes";
+    padding: 10px;
+    width: 25%;
+    background: #d9d9d9;
+    color: #555;
+    float: left;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 0;
+    border-radius: 40px;
+  }
+  
+  .button:hover {
+    background-color: #bbb;
+  }
+
+      </style>
+
+<script>
+
+// cria um botão de "fechar" e o adiciona em cada item
+var myNodelist = document.getElementsByTagName("LI");
+var i;
+for (i = 0; i < myNodelist.length; i++) {
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  myNodelist[i].appendChild(span);
+}
+
+// cliar em um botão de fechar esconderá o item da lista
+var close = document.getElementsByClassName("close");
+var i;
+for (i = 0; i < close.length; i++) {
+  close[i].onclick = function() {
+    var div = this.parentElement;
+    div.style.display = "none";
+  }
+}
+
+// adiciona um simbolo de "concluido" ao clicar em um item da lista
+var list = document.querySelector('ul');
+list.addEventListener('click', function(ev) {
+  if (ev.target.tagName === 'LI') {
+    ev.target.classList.toggle('checked');
+  }
+}, false);
+
+//cria um novo item na lista ao clicar no botão de "adicionar"
+function newElement() {
+    var li = document.createElement("li");
+    var inputValue = document.getElementById("input").value;
+    var t = document.createTextNode(inputValue);
+    li.appendChild(t);
+    if (inputValue === '') {
+      alert("escreva algo.");
+    } else {
+      document.getElementById("ul").appendChild(li);
+    }
+    document.getElementById("input").value = "";
+  
+    var span = document.createElement("SPAN");
+    var txt = document.createTextNode("\u00D7");
+    span.className = "close";
+    span.appendChild(txt);
+    li.appendChild(span);
+  
+    for (i = 0; i < close.length; i++) {
+      close[i].onclick = function() {
+        var div = this.parentElement;
+        div.style.display = "none";
+      }
+    }
+  }
+</script>
+
+
+</body>
+</html>
